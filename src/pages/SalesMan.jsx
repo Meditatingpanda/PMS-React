@@ -8,10 +8,10 @@ import CreateOrder from "../components/CreateOrder";
 import Orders from "../components/Orders";
 import SidebarSales from "../components/SidebarSales";
 
-function SalesMan({ state, setState }) {
+function SalesMan({ state, logoutHandler }) {
   return (
     <div>
-      <Navbar state={state} setState={setState} />
+      <Navbar state={state} logoutHandler={logoutHandler} />
       <div className="flex">
         <SidebarSales />
         <Routes>

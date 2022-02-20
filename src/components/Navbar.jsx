@@ -1,10 +1,10 @@
 import { Button } from "@mui/material";
 import LocalPharmacyIcon from "@mui/icons-material/LocalPharmacy";
 
-const Navbar = ({ state, setState }) => {
+const Navbar = ({ state ,logoutHandler}) => {
   const handleLogOut = () => {
     localStorage.state = "login";
-    setState("login");
+    logoutHandler();
   };
   return (
     <div className="h-20 flex justify-between">

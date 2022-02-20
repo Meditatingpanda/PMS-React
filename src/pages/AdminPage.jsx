@@ -6,10 +6,10 @@ import { Routes, Route } from "react-router-dom";
 import SalesExecutives from "../components/SalesExecutives";
 import CreateOrder from "../components/CreateOrder";
 import Orders from "../components/Orders";
-function AdminPage({state,setState}) {
+function AdminPage({ state, logoutHandler }) {
   return (
     <div>
-      <Navbar state={state} setState={setState} />
+      <Navbar state={state} logoutHandler={logoutHandler} />
       <div className="flex">
         <Sidebar />
         <Routes>

@@ -13,6 +13,7 @@ class App extends React.Component {
     window.addEventListener("storage", (e) => this.storageChanged(e));
     // Bind this to storageChanged()
     this.storageChanged = this.storageChanged.bind(this);
+    this.logoutHandler = this.logoutHandler.bind(this);
   }
 
   storageChanged(e) {
@@ -21,6 +22,9 @@ class App extends React.Component {
       this.setState({ state: e.newValue });
     }
   }
+  logoutHandler = () => {
+    this.setState({ state: "login" });
+  };
   render() {
     return (
       <>
@@ -28,10 +32,16 @@ class App extends React.Component {
           <LoginPage state={this.state.state} />
         ) : null}
         {this.state.state === "admin" ? (
-          <AdminPage state={this.state.state} />
+          <AdminPage
+            state={this.state.state}
+            logoutHandler={this.logoutHandler}
+          />
         ) : null}
         {this.state.state === "sales" ? (
-          <SalesMan state={this.state.state} />
+          <SalesMan
+            state={this.state.state}
+            logoutHandler={this.logoutHandler}
+          />
         ) : null}
       </>
     );
