@@ -80,9 +80,10 @@ function SalesExecutives() {
         tempArr[i] = updateData[`${keys[i]}`];
       }
     }
+    tempArr[2] = moment(tempArr[2], "YYYY-MM-DD").format("MM-DD-YYYY");
     newRows = [...rows];
     newRows[newId] = createData(...tempArr);
-    console.log(newRows);
+
     setRows([...newRows]);
     setIsOpen1(false);
     //setUpdate(false);
