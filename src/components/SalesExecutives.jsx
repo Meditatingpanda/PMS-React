@@ -65,7 +65,7 @@ function SalesExecutives() {
     addLocalStorage(rows.filter((key, keyId) => keyId !== id));
   };
   const handleAddToInventory = () => {
-    arr[2] = moment(arr[2], "YYYY-MM-DD").format("MM-DD-YYYY");
+    arr[2] = moment(arr[2], "YYYY-MM-DD").format("DD-MM-YYYY");
     setRows([...rows, createData(...arr)]);
     // setOpen(false);
     setIsOpen(false);
@@ -80,7 +80,7 @@ function SalesExecutives() {
         tempArr[i] = updateData[`${keys[i]}`];
       }
     }
-    tempArr[2] = moment(tempArr[2], "YYYY-MM-DD").format("MM-DD-YYYY");
+    tempArr[2] = moment(tempArr[2], "YYYY-MM-DD").format("DD-MM-YYYY");
     newRows = [...rows];
     newRows[newId] = createData(...tempArr);
 
