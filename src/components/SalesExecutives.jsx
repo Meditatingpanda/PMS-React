@@ -14,10 +14,8 @@ import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
 import { red } from "@mui/material/colors";
 import CloseIcon from "@mui/icons-material/Close";
-// import DatePicker from "@mui/lab/DatePicker";
-// import LocalizationProvider from "@mui/lab/LocalizationProvider";
-// import AdapterDateFns from "@mui/lab/AdapterDateFns";
-
+import styles from "./SalesExecutives.module.css";
+import { RiCloseLine } from "react-icons/ri";
 const style = {
   position: "absolute",
   top: "50%",
@@ -38,7 +36,7 @@ function SalesExecutives() {
   const addLocalStorage = (data) => {
     localStorage.salesManData = JSON.stringify(data);
   };
-
+  const [isOpen, setIsOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [update, setUpdate] = useState(false);
   const [updateData, SetUpdateData] = useState({});
@@ -68,6 +66,7 @@ function SalesExecutives() {
   const handleAddToInventory = () => {
     setRows([...rows, createData(...arr)]);
     setOpen(false);
+    setIsOpen(false);
   };
 
   const handleUpdate = (id) => {
@@ -90,7 +89,7 @@ function SalesExecutives() {
   };
 
   return (
-    <div className="bg-red-50 p-10 shadow-lg flex-grow rounded-lg ">
+    <div className={styles.container}>
       <Container>
         <Typography variant="h3" className="text-red-500 text-center">
           Sales Executives
@@ -99,10 +98,11 @@ function SalesExecutives() {
           variant="contained"
           color="error"
           sx={{ mb: 5 }}
-          onClick={handleOpen}
+          onClick={() => setIsOpen(true)}
         >
           + ADD NEW SALES EXECUTIEVE
         </Button>
+
         <TableContainer component={Paper} sx={{ minWidth: 400 }}>
           <Table aria-label="simple table">
             <TableHead>
@@ -153,7 +153,104 @@ function SalesExecutives() {
 
       {/* THis is for modal Section */}
 
-      <Modal
+      {isOpen ? (
+        <>
+          <div className={styles.darkBG} onClick={() => setIsOpen(false)} />
+          <div className={styles.centered}>
+            <div className={styles.modal}>
+              <div className={styles.modalHeader}>
+                <h5 className={styles.heading}>Add Executive Details</h5>
+              </div>
+              <button
+                className={styles.closeBtn}
+                onClick={() => setIsOpen(false)}
+              >
+                <RiCloseLine style={{ marginBottom: "-3px" }} />
+              </button>
+              <div className={styles.modalContent}>
+                <div className={styles.inputNames}>
+                  <span className={styles.inputsContainer}>
+                    <label className={styles.inputLabel} htmlFor="firstName">
+                      First Name
+                    </label>
+                    <input
+                      className={styles.input}
+                      id="firstName"
+                      type="text"
+                      placeholder="First Name"
+                      required
+                      onChange={(e) => (arr[0] = e.target.value)}
+                    />
+                  </span>
+                  <span className={styles.inputsContainer}>
+                    <label className={styles.inputLabel} htmlFor="firstName">
+                      Last Name
+                    </label>
+                    <input
+                      className={styles.input}
+                      id="lastName"
+                      type="text"
+                      placeholder="Last Name"
+                      required
+                      onChange={(e) => (arr[1] = e.target.value)}
+                    />
+                  </span>
+                </div>
+                <span className={styles.inputsContainer}>
+                  <label className={styles.inputLabel} htmlFor="Dob">
+                    DOB
+                  </label>
+                  <input
+                    className={styles.input}
+                    id="Dob"
+                    type="date"
+                    required
+                    onChange={(e) => (arr[2] = e.target.value)}
+                  />
+                </span>
+                <span className={styles.inputsContainer}>
+                  <label className={styles.inputLabel} htmlFor="Gender">
+                    Gender(M/F/O)
+                  </label>
+                  <input
+                    className={styles.input}
+                    id="Gender"
+                    type="text"
+                    placeholder="Gender"
+                    required
+                    onChange={(e) => (arr[3] = e.target.value)}
+                  />
+                </span>
+                <span className={styles.inputsContainer}>
+                  <label className={styles.inputLabel} htmlFor="exp">
+                    Experience
+                  </label>
+                  <input
+                    className={styles.input}
+                    id="exp"
+                    type="number"
+                    placeholder={0}
+                    required
+                    onChange={(e) => (arr[4] = e.target.value)}
+                  />
+                </span>
+              </div>
+              <div className={styles.modalActions}>
+                <div className={styles.actionsContainer}>
+                  <button
+                    className={styles.deleteBtn}
+                    onClick={handleAddToInventory}
+                  >
+                    Add To The Team
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      ) : null}
+
+      {/* <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
@@ -199,16 +296,6 @@ function SalesExecutives() {
               mb: 5,
             }}
           >
-            {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DatePicker
-                label="Basic example"
-                value={value}
-                onChange={(newValue) => {
-                  setValue(newValue);
-                }}
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </LocalizationProvider> */}
             <div className="flex flex-col text-gray-600">
               <label for="dob">DOB</label>
               <input
@@ -218,14 +305,7 @@ function SalesExecutives() {
                 className="border-2 rounded pl-2"
               />
             </div>
-            {/* <TextField
-              variant="outlined"
-              label="DOB"
-              sx={{ width: "25%" }}
-              type="number"
-              defaultValue={0}
-              onChange={(e) => (arr[2] = e.target.value)}
-            /> */}
+
             <TextField
               variant="outlined"
               label="Gender(M/F/O)"
@@ -251,7 +331,7 @@ function SalesExecutives() {
             </Button>
           </Box>
         </Box>
-      </Modal>
+      </Modal> */}
 
       {/* Modal for product update */}
 
@@ -272,7 +352,7 @@ function SalesExecutives() {
             sx={{ textAlign: "center", mb: 5 }}
             className="text-red-500"
           >
-            Add Medicine Details
+            Add Executive Details
           </Typography>
           <Box
             sx={{
@@ -303,7 +383,7 @@ function SalesExecutives() {
               mb: 5,
             }}
           >
-             <div className="flex flex-col text-gray-600">
+            <div className="flex flex-col text-gray-600">
               <label for="dob">DOB</label>
               <input
                 type="date"

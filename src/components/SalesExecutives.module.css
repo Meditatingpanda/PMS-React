@@ -1,0 +1,125 @@
+.container{
+    background-color: rgb(254 242 242);
+    padding: 2.5rem;
+    flex-grow: 1;
+    border-radius: 0.5rem;
+}
+.darkBG {
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 100vw;
+  height: 100%;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal {
+  width: 700px;
+  height: 300px;
+  background: white;
+  color: white;
+  z-index: 10;
+  border-radius: 6px;
+  box-shadow: 0 0 5px 5px rgb(230,161,161);
+ 
+}
+
+.modalHeader {
+  height: 50px;
+  background: white;
+  overflow: hidden;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.heading {
+  margin: 0;
+  padding: 10px;
+  color: rgb(250,68,71);
+  font-weight: 500;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.modalContent {
+  padding: 10px 35px;
+  margin:auto;
+  display:flex;
+  flex-wrap:wrap;
+  height:65%;
+  justify-content:space-between;
+  
+}
+
+.modalActions {
+  position: absolute;
+  bottom: 2px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.actionsContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.closeBtn {
+  cursor: pointer;
+  font-size: 2rem;
+  color: rgb(250,68,71);
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.deleteBtn {
+  margin-top: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 10px 12px;
+  border-radius: 2px;
+  font-size: 1rem;
+  border: none;
+  color: #fff;
+  background: #ff3e4e;
+  transition: all 0.25s ease;
+}
+
+.inputsContainer{
+   display:flex;
+   flex-direction:column;
+   align-items: start;
+   font-size:1rem;
+   width:calc(100%/3);
+   
+}
+.inputLabel{
+color:rgba(0,0,0,0.6);
+
+}
+.input{
+  border:1px solid rgba(250,68,71,0.2);
+  padding:5px 10px;
+  border-radius:5px;
+  color:gray;
+}
+.input:focus {
+ outline: none;
+ border:none;
+ box-shadow: 0 0 2px 2px rgba(255,0,0,0.6);
+}
+.inputNames{
+   display:flex;
+   justify-content:space-between;
+   width:100%;
+  
+}
