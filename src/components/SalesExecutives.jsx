@@ -16,6 +16,7 @@ import { red } from "@mui/material/colors";
 import CloseIcon from "@mui/icons-material/Close";
 import styles from "./SalesExecutives.module.css";
 import { RiCloseLine } from "react-icons/ri";
+import moment from "moment";
 const style = {
   position: "absolute",
   top: "50%",
@@ -37,6 +38,7 @@ function SalesExecutives() {
     localStorage.salesManData = JSON.stringify(data);
   };
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpen1, setIsOpen1] = useState(false);
   const [open, setOpen] = useState(false);
   const [update, setUpdate] = useState(false);
   const [updateData, SetUpdateData] = useState({});
@@ -62,18 +64,16 @@ function SalesExecutives() {
     setRows(rows.filter((key, keyId) => keyId !== id));
     addLocalStorage(rows.filter((key, keyId) => keyId !== id));
   };
-
   const handleAddToInventory = () => {
+    arr[2] = moment(arr[2], "YYYY-MM-DD").format("MM-DD-YYYY");
     setRows([...rows, createData(...arr)]);
-    setOpen(false);
+    // setOpen(false);
     setIsOpen(false);
   };
-
   const handleUpdate = (id) => {
     SetUpdateData({ ...rows[id] });
     setNewId(id);
   };
-
   const handleUpdateDetails = () => {
     for (let i = 0; i < 5; i++) {
       if (!tempArr[i]) {
@@ -84,10 +84,9 @@ function SalesExecutives() {
     newRows[newId] = createData(...tempArr);
     console.log(newRows);
     setRows([...newRows]);
-
-    setUpdate(false);
+    setIsOpen1(false);
+    //setUpdate(false);
   };
-
   return (
     <div className={styles.container}>
       <Container>
@@ -119,7 +118,7 @@ function SalesExecutives() {
             <TableBody>
               {rows.map((row, id) => (
                 <TableRow
-                  key={row.name}
+                  key={id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
@@ -133,7 +132,8 @@ function SalesExecutives() {
                     <IconButton
                       onClick={() => {
                         handleUpdate(id);
-                        setUpdate(true);
+                        // setUpdate(true);
+                        setIsOpen1(true);
                       }}
                     >
                       <EditIcon />
@@ -204,6 +204,8 @@ function SalesExecutives() {
                     className={styles.input}
                     id="Dob"
                     type="date"
+                    placeholder="dd-mm-yyyy"
+                    value={arr[2]}
                     required
                     onChange={(e) => (arr[2] = e.target.value)}
                   />
@@ -334,6 +336,104 @@ function SalesExecutives() {
       </Modal> */}
 
       {/* Modal for product update */}
+      {isOpen1 ? (
+        <>
+          <div className={styles.darkBG} onClick={() => setIsOpen1(false)} />
+          <div className={styles.centered}>
+            <div className={styles.modal}>
+              <div className={styles.modalHeader}>
+                <h5 className={styles.heading}>Add Executive Details</h5>
+              </div>
+              <button
+                className={styles.closeBtn}
+                onClick={() => setIsOpen1(false)}
+              >
+                <RiCloseLine style={{ marginBottom: "-3px" }} />
+              </button>
+              <div className={styles.modalContent}>
+                <div className={styles.inputNames}>
+                  <span className={styles.inputsContainer}>
+                    <label className={styles.inputLabel} htmlFor="firstName">
+                      First Name
+                    </label>
+                    <input
+                      className={styles.input}
+                      id="firstName"
+                      type="text"
+                      required
+                      placeholder={updateData.name}
+                      onChange={(e) => (tempArr[0] = e.target.value)}
+                    />
+                  </span>
+                  <span className={styles.inputsContainer}>
+                    <label className={styles.inputLabel} htmlFor="firstName">
+                      Last Name
+                    </label>
+                    <input
+                      className={styles.input}
+                      id="lastName"
+                      type="text"
+                      required
+                      placeholder={updateData.Manufacturer}
+                      onChange={(e) => (tempArr[1] = e.target.value)}
+                    />
+                  </span>
+                </div>
+                <span className={styles.inputsContainer}>
+                  <label className={styles.inputLabel} htmlFor="Dob">
+                    DOB
+                  </label>
+                  <input
+                    className={styles.input}
+                    id="Dob"
+                    type="date"
+                    required
+                    placeholder={updateData.price}
+                    onChange={(e) => (tempArr[2] = e.target.value)}
+                  />
+                </span>
+                <span className={styles.inputsContainer}>
+                  <label className={styles.inputLabel} htmlFor="Gender">
+                    Gender(M/F/O)
+                  </label>
+                  <input
+                    className={styles.input}
+                    id="Gender"
+                    type="text"
+                    required
+                    placeholder={updateData.stocks}
+                    onChange={(e) => (tempArr[3] = e.target.value)}
+                  />
+                </span>
+                <span className={styles.inputsContainer}>
+                  <label className={styles.inputLabel} htmlFor="exp">
+                    Experience
+                  </label>
+                  <input
+                    className={styles.input}
+                    id="exp"
+                    type="number"
+                    placeholder={0}
+                    required
+                    placeholder={updateData.discount}
+                    onChange={(e) => (tempArr[4] = e.target.value)}
+                  />
+                </span>
+              </div>
+              <div className={styles.modalActions}>
+                <div className={styles.actionsContainer}>
+                  <button
+                    className={styles.deleteBtn}
+                    onClick={handleUpdateDetails}
+                  >
+                    Update Details
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      ) : null}
 
       <Modal
         open={update}
